@@ -14,9 +14,9 @@ spec:
   # Destination cluster and namespace to deploy the application
   destination:
     # cluster API URL
-    # server: https://kubernetes.default.svc
+    server: https://192.168.56.59:6443
     # or cluster name
-    name: prod01
+    #name: prod01
     # The namespace will only be set for namespace-scoped resources that have not set a value for .metadata.namespace
     namespace: kyverno
 
