@@ -1,0 +1,16 @@
+# This clusterrole does not need a specific clusterrolebinding because its attached to an existing clusterrole "kyverno:cleanup-controller" using aggregationRule. Its matched based on the labels added. So the clusterrolebinding will be common for these two clusterroles.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  annotations:
+    meta.helm.sh/release-name: kyverno
+    meta.helm.sh/release-namespace: kyverno
+  labels:
+    app.kubernetes.io/component: cleanup-controller
+    app.kubernetes.io/instance: kyverno
+    app.kubernetes.io/part-of: kyverno
+  name: kyverno:cleanup-controller-pods
+rules:
+- apiGroups: [""]
+  resources: ["pods"]
+  verbs: ["delete", "list"]

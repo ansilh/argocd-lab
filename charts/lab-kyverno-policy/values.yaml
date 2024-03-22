@@ -1,0 +1,14 @@
+policies:
+  imageValidation:
+    enable: false
+    namespace: default
+
+clusterPolicies:
+  resourceLimitRequest:
+    enable: false
+  disallowPrivilegedContainers:
+    enable: false
+  disallowCapabilities:
+    enable: false
+  cleanupCompletedPods:
+    enable: false

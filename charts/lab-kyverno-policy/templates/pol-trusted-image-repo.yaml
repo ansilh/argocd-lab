@@ -1,0 +1,22 @@
+{{- if .Values.policies.imageValidation.enable }}
+apiVersion: kyverno.io/v1
+kind: Policy # If its set to Policy, then its a namespaced and if its ClusterPolicy, then its a cluster-wide
+metadata:
+  name: image-validation
+  namespace: {{ .Values.policies.imageValidation.namespace }} # This field is not needed if its a ClusterPolicy
+spec:
+  validationFailureAction: Audit
+  rules:
+    - name: validate-image-repo
+      match:
+        any:
+          - resources:
+              kinds:
+                - Pod
+      validate:
+        message: "Image is not from a trusted repository"
+        pattern:
+          spec:
+            containers:
+              - image: "422940237045.dkr.ecr.us-east-1.amazonaws.com/argocd:?*"
+{{- end }}

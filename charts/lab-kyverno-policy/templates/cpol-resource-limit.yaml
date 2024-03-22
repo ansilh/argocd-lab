@@ -1,0 +1,31 @@
+{{- if .Values.clusterPolicies.resourceLimitRequest.enable }}
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy  # If its set to Policy, then its a namespaced and if its ClusterPolicy, then its a cluster-wide
+metadata:
+  name: require-resource-limits-requests
+spec:
+  validationFailureAction: Enforce
+  rules:
+  - name: validate-resources
+    match:
+      any:
+      - resources:
+          kinds:
+          - Pod
+    exclude:
+      any:
+      - resources:
+          namespaces:
+          - kube-system          
+    validate:
+      message: "CPU and memory resource requests and limits are required"
+      pattern:
+        spec:
+          containers:
+          - resources:
+              requests:
+                memory: "?*"
+                cpu: "?*"
+              limits:
+                memory: "?*"
+{{- end }}

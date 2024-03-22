@@ -1,0 +1,18 @@
+{{- if .Values.clusterPolicies.cleanupCompletedPods.enable }}
+apiVersion: kyverno.io/v2alpha1
+kind: ClusterCleanupPolicy
+metadata:
+  name: cleanup-completed-pods
+spec:
+  match:
+    any:
+      - resources:
+          kinds:
+            - Pod
+  conditions:
+    any:
+      - key: "{{`{{ target.status.phase }}`}}"
+        operator: Equals
+        value: "Succeeded"
+  schedule: "0 0 */2 * *" # runs every 2 days
+{{- end }}
