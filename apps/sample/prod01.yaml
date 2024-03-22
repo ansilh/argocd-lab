@@ -1,29 +1,30 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: sample-app
+  name: web-app-prod01
   namespace: argocd
 spec:
   # The project the application belongs to.
   project: default
   sources:
-    - repoURL: https://github.com/helm/examples.git
+    - repoURL: https://github.com/ansilh/argocd-lab.git
       targetRevision: main
-      path: charts/hello-world  # This has no meaning for Helm charts pulled directly from a Helm repo instead of git.
+      path: charts/web-app # This has no meaning for Helm charts pulled directly from a Helm repo instead of git.
 
   # Destination cluster and namespace to deploy the application
   destination:
     # cluster API URL
-    server: https://kubernetes.default.svc
+    server: https://192.168.56.59:6443
     # or cluster name
-    # name: in-cluster
+    #name: prod01
     # The namespace will only be set for namespace-scoped resources that have not set a value for .metadata.namespace
-    namespace: sample
+    namespace: kyverno
 
   # Extra information to show in the Argo CD Application details tab
   info:
-    - name: 'Example:'
-      value: 'https://example.com'
+    - name: 'Web App'
+      value: 'https://webapp.com'
   syncPolicy:
     syncOptions:
       - CreateNamespace=true
+

@@ -5,7 +5,7 @@ policies:
 
 clusterPolicies:
   resourceLimitRequest:
-    enable: false
+    enable: true
   disallowPrivilegedContainers:
     enable: false
   disallowCapabilities:
