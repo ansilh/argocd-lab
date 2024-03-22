@@ -18,7 +18,7 @@ spec:
     # or cluster name
     #name: prod01
     # The namespace will only be set for namespace-scoped resources that have not set a value for .metadata.namespace
-    namespace: kyverno
+    namespace: web-apps
 
   # Extra information to show in the Argo CD Application details tab
   info:
