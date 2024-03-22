@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: sample-app
+  name: kyverno
   namespace: argocd
 spec:
   # The project the application belongs to.
