@@ -10,10 +10,10 @@ spec:
     - repoURL: https://github.com/ansilh/argocd-lab.git
       targetRevision: main
       path: charts/web-app # This has no meaning for Helm charts pulled directly from a Helm repo instead of git.
-  helm:
-    parameters:
-    - name: "service.type"
-      value: "LoadBalancer"
+    helm:
+      parameters:
+      - name: "service.type"
+        value: "LoadBalancer"
 
   # Destination cluster and namespace to deploy the application
   destination:
